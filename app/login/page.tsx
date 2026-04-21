@@ -7,8 +7,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
-import Turnstile from 'react-turnstile'
-import { useState } from 'react'
 
 const initialState = {
     error: '',
@@ -33,17 +31,6 @@ export default function LoginPage() {
                         <div className="space-y-2">
                             <Label htmlFor="password">Password</Label>
                             <Input id="password" name="password" type="password" required />
-                        </div>
-
-                        <div className="flex justify-center py-2">
-                            <Turnstile
-                                sitekey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || ""}
-                                onVerify={(token) => {
-                                    const input = document.getElementById('cf-turnstile-response') as HTMLInputElement
-                                    if (input) input.value = token
-                                }}
-                            />
-                            <input type="hidden" name="cf-turnstile-response" id="cf-turnstile-response" />
                         </div>
 
                         {state?.error && (
