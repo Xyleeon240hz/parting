@@ -93,6 +93,10 @@ export async function register(prevState: unknown, formData: FormData) {
 
         await createSession(user.id)
     } catch (e) {
+        console.error('Registration error:', e)
+        if (e instanceof Error) {
+            return { error: `Registration failed: ${e.message}` }
+        }
         return { error: 'Registration failed' }
     }
 
